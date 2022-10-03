@@ -30,6 +30,7 @@ import NucleoIcons from "views/NucleoIcons.js";
 import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
+import LogInPage from "views/examples/LogInPage";
 // others
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -53,6 +54,10 @@ root.render(
       <Route
         path="/register-page"
         render={(props) => <RegisterPage {...props} />}
+      />
+       <Route
+        path="/login-page"
+        render={(props) => <LogInPage {...props} />}
       />
       <Redirect to="/index" />
     </Switch>

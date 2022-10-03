@@ -7,7 +7,6 @@ import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 
-
 function RegisterPage() {
   const histroy = useHistory();
   const [email, setEmail] = useState();
@@ -23,7 +22,7 @@ function RegisterPage() {
 
   const registerData = {
     email: email,
-    password: password
+    password: password,
   };
 
   document.documentElement.classList.remove("nav-open");
@@ -35,7 +34,7 @@ function RegisterPage() {
   });
 
   const tokenReceiveHandler = async () => {
-    const response = await fetch("https://reqres.in/api/register", {
+    const response = await fetch("https://reqres.in/api/login", {
       method: "POST",
       body: JSON.stringify(registerData),
       headers: {
@@ -44,13 +43,18 @@ function RegisterPage() {
     });
     const data = await response.json();
     const token = data.token;
-    localStorage.setItem("register-token", token);
+    localStorage.setItem("login-token", token);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
     tokenReceiveHandler();
-    histroy.replace('/login-page')
+    histroy.replace("/login-page");
+    if (localStorage.getItem("register-token")) {
+      histroy.push("/index");
+    } else {
+      histroy.push("/register-page");
+    }
   };
 
   return (
@@ -82,7 +86,7 @@ function RegisterPage() {
                     type="password"
                     onChange={passwordChangeHandler}
                   />
-                  <Button className="btn-link" onClick={()=>{histroy.push('/login-page')}} type="button">Sign In Here</Button>
+                  <Button className="btn-link" onClick={()=>{histroy.push('/register-page')}} type="button">Register Here</Button>
 
                   <Button
                     block
@@ -90,7 +94,7 @@ function RegisterPage() {
                     color="danger"
                     type="submit"
                   >
-                    Register
+                    Log In
                   </Button>
                 </Form>
               </Card>
