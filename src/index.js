@@ -31,6 +31,7 @@ import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
 import LogInPage from "views/examples/LogInPage";
+import CemeteryPage from "views/examples/Cemeterypage";
 // others
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -58,6 +59,10 @@ root.render(
        <Route
         path="/login-page"
         render={(props) => <LogInPage {...props} />}
+      />
+       <Route
+        path="/cemetery-page"
+        render={(props) => <CemeteryPage {...props} />}
       />
       <Redirect to="/index" />
     </Switch>
