@@ -49,11 +49,10 @@ function RegisterPage() {
   const submitHandler = (event) => {
     event.preventDefault();
     tokenReceiveHandler();
-    histroy.replace("/login-page");
-    if (localStorage.getItem("register-token")) {
-      histroy.push("/index");
-    } else {
+    if (!localStorage.getItem("register-token")) {
       histroy.push("/register-page");
+    } else if (localStorage.getItem("login-token")){
+      histroy.push("/home-page");
     }
   };
 

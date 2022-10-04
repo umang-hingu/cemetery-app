@@ -19,15 +19,26 @@ const history = useHistory();
 
   const logoutHandler = (e) => {
     e.preventDefault();
-    localStorage.clear();
+    
     history.replace('/login-page')
+    localStorage.clear();
   };
 
   const cemeteryNavbarHandler = (e) => {
     e.preventDefault();
-    localStorage.clear();
-    history.replace('/cemetery-page')
+    history.push('/cemetery-page')
   };
+
+  const aboutUsPageHandler = (e) => {
+    e.preventDefault();
+    history.push('/about-page')
+  };
+
+  const homepageHandler = (e) => {
+    e.preventDefault();
+    history.push('/home-page')
+  };
+  
 
   return (
     <Navbar color="danger" className={classnames("fixed-top")} expand="lg">
@@ -44,8 +55,8 @@ const history = useHistory();
         <Collapse className="justify-content-end" navbar>
           <Nav navbar>
             <NavItem>
-              <NavLink onClick={e => e.preventDefault()}>
-                <i className="nc-icon nc-button-power" /> 123
+              <NavLink href='' onClick={homepageHandler}>
+                <i className="nc-icon nc-button-power" /> Home Page
               </NavLink>
             </NavItem>
             <NavItem >
@@ -54,7 +65,7 @@ const history = useHistory();
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink onClick={e => e.preventDefault()}>
+              <NavLink href='' onClick={aboutUsPageHandler}>
                 <i className="nc-icon nc-alert-circle-i" /> About Us
               </NavLink>
             </NavItem>

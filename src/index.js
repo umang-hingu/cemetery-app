@@ -18,53 +18,26 @@
 */
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+
 
 // styles
 import "bootstrap/scss/bootstrap.scss";
 import "assets/scss/paper-kit.scss?v=1.3.0";
 import "assets/demo/demo.css?v=1.3.0";
 // pages
-import Index from "views/Index.js";
-import NucleoIcons from "views/NucleoIcons.js";
-import LandingPage from "views/examples/LandingPage.js";
-import ProfilePage from "views/examples/ProfilePage.js";
-import RegisterPage from "views/examples/RegisterPage.js";
-import LogInPage from "views/examples/LogInPage";
-import CemeteryPage from "views/examples/Cemeterypage";
+import { BrowserRouter} from "react-router-dom";
+
+import App from "App";
+import AuthContextProvider from "store/context";
 // others
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+
 root.render(
+  <AuthContextProvider>
   <BrowserRouter>
-    <Switch>
-      <Route path="/index" render={(props) => <Index {...props} />} />
-      <Route
-        path="/nucleo-icons"
-        render={(props) => <NucleoIcons {...props} />}
-      />
-      <Route
-        path="/landing-page"
-        render={(props) => <LandingPage {...props} />}
-      />
-      <Route
-        path="/profile-page"
-        render={(props) => <ProfilePage {...props} />}
-      />
-      <Route
-        path="/register-page"
-        render={(props) => <RegisterPage {...props} />}
-      />
-       <Route
-        path="/login-page"
-        render={(props) => <LogInPage {...props} />}
-      />
-       <Route
-        path="/cemetery-page"
-        render={(props) => <CemeteryPage {...props} />}
-      />
-      <Redirect to="/index" />
-    </Switch>
+    <App />
   </BrowserRouter>
+  </AuthContextProvider>
 );

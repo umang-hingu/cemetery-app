@@ -11,7 +11,7 @@ import { Button, Col, Container, Input, Row } from "reactstrap";
 import { FormGroup, FormText } from "reactstrap";
 
 const center = { lat: 21.215284608632743, lng: 72.85702453927374 };
-const libraries = ["places"];
+const libraries = ["places", "drawing"];
 
 function CemeteryPage() {
   const [map, setMap] = useState(null);
@@ -69,8 +69,27 @@ function CemeteryPage() {
     setPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() });
   };
 
+  const datatosend = {latitude: position.lat, longitude: position.lng, address}
+
+
+  const sendData = async () => {
+    const response =  await fetch(
+      "https://cemetery-app-2ae5a-default-rtdb.firebaseio.com/item.json",
+      {
+        method: "POST",
+        body: JSON.stringify(datatosend),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
+    sendData();
   };
 
   const autoSearchValueHandler = (e) => {
