@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 // nodejs library that concatenates strings
 import classnames from "classnames";
 // reactstrap components
@@ -13,32 +13,33 @@ import {
 } from "reactstrap";
 
 import { useHistory } from "react-router-dom";
+import { AuthContext } from "store/context";
 
 function IndexNavbar() {
-const history = useHistory();
+  const ctx = useContext(AuthContext);
+  const history = useHistory();
 
   const logoutHandler = (e) => {
     e.preventDefault();
-    
-    history.replace('/login-page')
-    localStorage.clear();
+
+    history.replace("/login-page");
+    ctx.logout();
   };
 
   const cemeteryNavbarHandler = (e) => {
     e.preventDefault();
-    history.push('/cemetery-page')
+    history.push("/cemetery-page");
   };
 
   const aboutUsPageHandler = (e) => {
     e.preventDefault();
-    history.push('/about-page')
+    history.push("/about-page");
   };
 
   const homepageHandler = (e) => {
     e.preventDefault();
-    history.push('/home-page')
+    history.push("/home-page");
   };
-  
 
   return (
     <Navbar color="danger" className={classnames("fixed-top")} expand="lg">
@@ -55,17 +56,17 @@ const history = useHistory();
         <Collapse className="justify-content-end" navbar>
           <Nav navbar>
             <NavItem>
-              <NavLink href='' onClick={homepageHandler}>
+              <NavLink href="" onClick={homepageHandler}>
                 <i className="nc-icon nc-button-power" /> Home Page
               </NavLink>
             </NavItem>
-            <NavItem >
+            <NavItem>
               <NavLink href="" onClick={cemeteryNavbarHandler}>
                 <i className="nc-icon nc-badge" /> Cemetery Information
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href='' onClick={aboutUsPageHandler}>
+              <NavLink href="" onClick={aboutUsPageHandler}>
                 <i className="nc-icon nc-alert-circle-i" /> About Us
               </NavLink>
             </NavItem>

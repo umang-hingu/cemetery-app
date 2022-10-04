@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 // reactstrap components
@@ -6,8 +6,10 @@ import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
 
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+import { AuthContext } from "store/context";
 
 function RegisterPage() {
+  const ctx = useContext(AuthContext);
   const histroy = useHistory();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -43,17 +45,18 @@ function RegisterPage() {
     });
     const data = await response.json();
     const token = data.token;
-    localStorage.setItem("login-token", token);
+    ctx.login(token);
+    // localStorage.setItem("login-token", token);
+    if (!ctx.registerToken) {
+      histroy.push("/register-page");
+    } else if (ctx.isLoggedIn){
+      histroy.push("/home-page");
+    }
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    tokenReceiveHandler();
-    if (!localStorage.getItem("register-token")) {
-      histroy.push("/register-page");
-    } else if (localStorage.getItem("login-token")){
-      histroy.push("/home-page");
-    }
+    tokenReceiveHandler(); 
   };
 
   return (
